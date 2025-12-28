@@ -26,7 +26,6 @@ interface Supplier {
   phoneNumber: string;
 }
 
-// Fetch suppliers
 const fetchSuppliers = async (): Promise<Supplier[]> => {
   try {
     const res = await apiClient.get("/api/suppliers");
@@ -72,18 +71,16 @@ export default function SuppliersPage() {
             Manage your vendors and contact information.
           </p>
         </div>
-        <div className="flex gap-2">
-          <Button asChild>
-            <Link href="/suppliers/new">
-              <Plus className="h-4 w-4 mr-2" /> Add Supplier
-            </Link>
-          </Button>
-        </div>
+        <Button asChild>
+          <Link href="/suppliers/new">
+            <Plus className="h-4 w-4 mr-2" /> Add Supplier
+          </Link>
+        </Button>
       </div>
 
       <Card>
         <CardHeader className="pb-3">
-          <CardTitle className="text-lg font-medium">Supplier List</CardTitle>
+          <CardTitle className="text-lg font-medium">Suppliers List</CardTitle>
           <div className="flex items-center gap-2 pt-2">
             <div className="relative flex-1 max-w-sm">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -128,15 +125,12 @@ export default function SuppliersPage() {
                     </div>
                   </TableCell>
                   <TableCell className="text-right flex justify-end gap-2">
-                    {/* Edit using query params */}
                     <Button
                       variant="ghost"
                       size="icon"
                       onClick={() =>
                         router.push(
-                          `/suppliers/new?id=${
-                            item.id
-                          }&name=${encodeURIComponent(
+                          `/suppliers/new?id=${item.id}&name=${encodeURIComponent(
                             item.name
                           )}&contactPerson=${encodeURIComponent(
                             item.contactPerson
@@ -152,7 +146,6 @@ export default function SuppliersPage() {
                       <span className="sr-only">Edit</span>
                     </Button>
 
-                    {/* Delete */}
                     <Button
                       variant="ghost"
                       size="icon"
