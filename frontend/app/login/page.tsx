@@ -14,16 +14,14 @@ export default function LoginPage() {
     setError("");
 
     try {
-      // Call backend login API
+      
       const response = await axios.post("https://localhost:8081/auth/login", {
-        username: username, // backend may use 'username' field
+        username: username, 
         password: password,
       });
 
-      // Save token if backend returns JWT
       localStorage.setItem("token", response.data.token);
 
-      // Redirect to dashboard
       router.push("/dashboard");
     } catch (err: any) {
       console.error(err);
