@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -14,19 +15,14 @@ export default function LoginPage() {
     setError("");
 
     try {
-      // Call backend login API
       const response = await axios.post("https://localhost:8081/auth/login", {
-        username: username, // backend may use 'username' field
-        password: password,
+        username,
+        password,
       });
 
-      // Save token if backend returns JWT
       localStorage.setItem("token", response.data.token);
-
-      // Redirect to dashboard
       router.push("/dashboard");
     } catch (err: any) {
-      console.error(err);
       setError(err.response?.data || "Login failed. Check your credentials.");
     }
   };
