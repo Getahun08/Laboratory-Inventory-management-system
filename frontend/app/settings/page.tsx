@@ -54,7 +54,7 @@ export default function SettingsPage() {
                                     Receive notifications when items go below threshold.
                                 </p>
                             </div>
-                            {/* Toggle switch would go here, using Button for now */}
+                            
                             <Button variant="outline" size="sm">Enabled</Button>
                         </div>
                         <div className="flex items-center justify-between rounded-lg border p-4">
