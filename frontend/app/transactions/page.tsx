@@ -27,9 +27,9 @@ interface Transaction {
   notes?: string;
 }
 
-// Fetch transactions from backend
+
 const fetchTransactions = async (): Promise<Transaction[]> => {
-  const res = await apiClient.get("/api/transactions"); // Backend endpoint
+  const res = await apiClient.get("/api/transactions"); 
   return res.data || [];
 };
 
