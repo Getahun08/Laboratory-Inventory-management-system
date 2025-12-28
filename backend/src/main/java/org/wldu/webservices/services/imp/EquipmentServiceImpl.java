@@ -41,16 +41,6 @@ public class EquipmentServiceImpl implements EquipmentService {
         return equipmentRepository.findByStatus(status);
     }
 
-//    @Override
-//    public List<Equipment> getEquipmentBySupplier(Long supplierId) {
-//        return null;
-//    }
-
-//    @Override
-//    public List<Equipment> getEquipmentBySupplier(Long supplierId) {
-//        return equipmentRepository.findBySupplierId(supplierId);
-//    }
-
     @Override
     public Optional<Equipment> updateEquipment(Long id, Equipment equipmentDetails) {
         return equipmentRepository.findById(id)
@@ -62,14 +52,9 @@ public class EquipmentServiceImpl implements EquipmentService {
                     equipment.setQuantity(equipmentDetails.getQuantity());
 //                    equipment.setSupplier(equipmentDetails.getSupplier());
 
-                    // Save to DB
-                    Equipment updated = equipmentRepository.save(equipment);
-                    return updated;
+                    return equipmentRepository.save(equipment);
                 });
     }
-
-
-
 
     @Override
     public void deleteEquipment(Long id) {
@@ -77,7 +62,7 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
-    public Object countAll() {
-        return null;
+    public long countAll() {
+        return equipmentRepository.count();
     }
 }

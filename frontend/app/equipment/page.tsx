@@ -65,81 +65,132 @@ export default function EquipmentPage() {
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  return (
-    <div className="space-y-6">
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Equipment</h1>
-          <p className="text-muted-foreground">
-            Manage laboratory equipment inventory.
-          </p>
-        </div>
-        <div className="flex gap-2">
-          <Button asChild>
-            <Link href="/equipment/new">
-              <Plus className="h-4 w-4 mr-2" /> Add Equipment
-            </Link>
-          </Button>
-        </div>
+ return (
+  <div className="min-h-screen bg-slate-50 p-6 space-y-8">
+    {/* Header */}
+    <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+      <div>
+        <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
+          Equipment Inventory
+        </h1>
+        <p className="text-slate-500 mt-1">
+          Manage and track laboratory equipment status.
+        </p>
       </div>
-      
 
-      <Card>
-        <CardHeader className="pb-3 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-          <CardTitle className="text-lg font-medium">Equipment List</CardTitle>
-          <div className="relative flex-1 max-w-sm mt-4 md:mt-0">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Search equipment..."
-              className="pl-8"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
-        </CardHeader>
+      <Button
+        asChild
+        className="bg-blue-600 hover:bg-blue-700 text-white shadow"
+      >
+        <Link href="/equipment/new">
+          <Plus className="h-4 w-4 mr-2" /> Add Equipment
+        </Link>
+      </Button>
+    </div>
 
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Name</TableHead>
-                <TableHead>Category</TableHead>
-                <TableHead>Serial No.</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Quantity</TableHead>
-                {/* <TableHead>Supplier</TableHead> */}
-                <TableHead className="text-right">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
+    {/* Table Card */}
+    <Card className="border-blue-100 shadow-sm">
+      <CardHeader className="pb-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <CardTitle className="text-lg font-semibold text-blue-800">
+          Equipment List
+        </CardTitle>
 
-            <TableBody>
-              {filteredEquipment.map((item) => (
-                <TableRow key={item.id}>
-                  <TableCell className="font-medium">{item.name}</TableCell>
-                  <TableCell>{item.category || "-"}</TableCell>
-                  <TableCell>{item.serialNumber || "-"}</TableCell>
-                  <TableCell>{item.status}</TableCell>
-                  <TableCell>{item.quantity}</TableCell>
-                  {/* <TableCell>{item.supplier?.name || "-"}</TableCell> */}
+        {/* Search */}
+        <div className="relative w-full md:max-w-sm">
+          <Search className="absolute left-3 top-3 h-4 w-4 text-slate-400" />
+          <Input
+            type="search"
+            placeholder="Search equipment..."
+            className="pl-9 border-blue-200 focus:border-blue-500 focus:ring-blue-500"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+      </CardHeader>
 
-                  <TableCell className="text-right flex justify-end gap-2">
+      <CardContent>
+        <Table>
+          <TableHeader>
+            <TableRow className="bg-blue-50">
+              <TableHead className="font-semibold text-blue-700">
+                Name
+              </TableHead>
+              <TableHead className="font-semibold text-blue-700">
+                Category
+              </TableHead>
+              <TableHead className="font-semibold text-blue-700">
+                Serial No.
+              </TableHead>
+              <TableHead className="font-semibold text-blue-700">
+                Status
+              </TableHead>
+              <TableHead className="font-semibold text-blue-700">
+                Quantity
+              </TableHead>
+              <TableHead className="text-right font-semibold text-blue-700">
+                Actions
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+
+          <TableBody>
+            {filteredEquipment.map((item) => (
+              <TableRow
+                key={item.id}
+                className="hover:bg-blue-50 transition"
+              >
+                <TableCell className="font-medium text-slate-800">
+                  {item.name}
+                </TableCell>
+
+                <TableCell className="text-slate-600">
+                  {item.category || "-"}
+                </TableCell>
+
+                <TableCell className="text-slate-600">
+                  {item.serialNumber || "-"}
+                </TableCell>
+
+                {/* Status Badge */}
+                <TableCell>
+                  <span
+                    className={`
+                      inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold
+                      ${
+                        item.status === "ACTIVE"
+                          ? "bg-green-100 text-green-700"
+                          : item.status === "UNDER_MAINTENANCE"
+                          ? "bg-yellow-100 text-yellow-800"
+                          : item.status === "DAMAGED"
+                          ? "bg-red-100 text-red-700"
+                          : "bg-slate-200 text-slate-700"
+                      }
+                    `}
+                  >
+                    {item.status.replace("_", " ")}
+                  </span>
+                </TableCell>
+
+                <TableCell className="font-semibold text-slate-800">
+                  {item.quantity}
+                </TableCell>
+
+                {/* Actions */}
+                <TableCell className="text-right">
+                  <div className="flex justify-end gap-2">
                     <Button
                       variant="ghost"
                       size="icon"
+                      className="hover:bg-blue-100"
                       onClick={() =>
                         router.push(
-                          `/equipment/new?id=${
-                            item.id
-                          }&name=${encodeURIComponent(
+                          `/equipment/new?id=${item.id}&name=${encodeURIComponent(
                             item.name
                           )}&category=${encodeURIComponent(
                             item.category || ""
                           )}&serialNumber=${encodeURIComponent(
                             item.serialNumber || ""
-                          )}&status=${item.status}&quantity=${
-                            item.quantity
-                          }`
+                          )}&status=${item.status}&quantity=${item.quantity}`
                         )
                       }
                     >
@@ -149,20 +200,23 @@ export default function EquipmentPage() {
                     <Button
                       variant="ghost"
                       size="icon"
+                      className="hover:bg-red-100"
                       onClick={() => {
-                        if (confirm(`Delete "${item.name}"?`))
+                        if (confirm(`Delete "${item.name}"?`)) {
                           deleteMutation.mutate(item.id);
+                        }
                       }}
                     >
                       <Trash className="h-4 w-4 text-red-600" />
                     </Button>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
-    </div>
-  );
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </CardContent>
+    </Card>
+  </div>
+);
 }

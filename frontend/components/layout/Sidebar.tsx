@@ -1,8 +1,8 @@
 "use client";
+import { cn } from "@/lib/utils";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/apiClient";
 import {
   LayoutDashboard,
   FlaskConical,
@@ -15,36 +15,12 @@ import {
 import { useState } from "react";
 
 const sidebarItems = [
-  {
-    title: "Dashboard",
-    href: "/dashboard",
-    icon: LayoutDashboard,
-  },
-  {
-    title: "Chemicals",
-    href: "/chemicals",
-    icon: FlaskConical,
-  },
-  {
-    title: "Equipment",
-    href: "/equipment",
-    icon: Microscope,
-  },
-  {
-    title: "Suppliers",
-    href: "/suppliers",
-    icon: Truck,
-  },
-  {
-    title: "Transactions",
-    href: "/transactions",
-    icon: ArrowRightLeft,
-  },
-  {
-    title: "Settings",
-    href: "/settings",
-    icon: Settings,
-  },
+  { title: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { title: "Chemicals", href: "/chemicals", icon: FlaskConical },
+  { title: "Equipment", href: "/equipment", icon: Microscope },
+  { title: "Suppliers", href: "/suppliers", icon: Truck },
+  { title: "Transactions", href: "/transactions", icon: ArrowRightLeft },
+  { title: "Settings", href: "/settings", icon: Settings },
 ];
 
 export function Sidebar() {
@@ -53,66 +29,77 @@ export function Sidebar() {
 
   return (
     <>
+      {/* Mobile Menu Button */}
       <button
-        className="md:hidden fixed top-4 right-4 z-50 p-2 bg-background border rounded-md"
+        className="md:hidden fixed top-4 right-4 z-50 p-2 rounded-lg
+                   bg-blue-600 text-white shadow-lg hover:bg-blue-700"
         onClick={() => setIsOpen(!isOpen)}
       >
         <Menu className="h-6 w-6" />
       </button>
 
-      <div
+      {/* Sidebar */}
+      <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-40 w-64 bg-card border-r transform transition-transform duration-200 ease-in-out md:translate-x-0",
-          isOpen ? "translate-x-0" : "-translate-x-full"
+          "fixed inset-y-0 left-0 z-40 w-64 transform transition-transform duration-300",
+          "bg-slate-50 border-r border-blue-100 shadow-sm",
+          isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         )}
       >
         <div className="flex flex-col h-full">
-          <div className="h-16 flex items-center px-6 border-b">
+          {/* Logo */}
+          <div className="h-16 flex items-center px-6 border-b border-blue-100">
             <Link
               href="/"
-              className="flex items-center gap-2 font-bold text-xl text-primary"
+              className="flex items-center gap-2 text-blue-700 font-bold text-xl"
             >
-              <FlaskConical className="h-6 w-6" />
+              <FlaskConical className="h-6 w-6 text-blue-600" />
               <span>LabManager</span>
             </Link>
           </div>
 
-          <div className="flex-1 overflow-y-auto py-4">
-            <nav className="px-2 space-y-1">
-              {sidebarItems.map((item) => {
-                const isActive = pathname === item.href;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={cn(
-                      "flex items-center gap-3 px-4 py-3 text-sm font-medium rounded-md transition-colors",
-                      isActive
-                        ? "bg-primary/10 text-primary"
-                        : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                    )}
-                  >
-                    <item.icon className="h-5 w-5" />
-                    {item.title}
-                  </Link>
-                );
-              })}
-            </nav>
-          </div>
+          {/* Navigation */}
+          <nav className="flex-1 overflow-y-auto py-6 px-3 space-y-3">
+            {sidebarItems.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    "flex items-center gap-4 px-4 py-5 rounded-xl",
+                    "text-base font-semibold transition-all duration-200",
+                    isActive
+                      ? "bg-blue-100 text-blue-700 shadow-sm"
+                      : "text-slate-700 hover:bg-blue-50 hover:text-blue-700"
+                  )}
+                >
+                  <item.icon className="h-5 w-5" />
+                  {item.title}
+                </Link>
+              );
+            })}
+          </nav>
 
-          <div className="p-4 border-t">
-            <div className="flex items-center gap-3 px-2">
-              <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">
+          {/* User Info */}
+          <div className="p-4 border-t border-blue-100">
+            <div className="flex items-center gap-3">
+              <div
+                className="h-10 w-10 rounded-full bg-blue-600 text-white
+                              flex items-center justify-center font-bold"
+              >
                 A
               </div>
               <div>
-                <p className="text-sm font-medium">Admin User</p>
-                <p className="text-xs text-muted-foreground">admin@lab.com</p>
+                <p className="text-sm font-semibold text-slate-800">
+                  Admin User
+                </p>
+                <p className="text-xs text-slate-500">admin@lab.com</p>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </aside>
     </>
   );
 }

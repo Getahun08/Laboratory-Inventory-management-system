@@ -1,21 +1,23 @@
-// lib/utils.ts
+// lib/apiClient.ts
 import axios from "axios";
 
-// ✅ MUST match Spring Boot HTTPS
-const baseURL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "https://localhost:8081";
-
-export const api = axios.create({
-  baseURL,
+const apiClient = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL || "https://localhost:8081",
   headers: {
     "Content-Type": "application/json",
   },
-  withCredentials: true, // ✅ REQUIRED for CORS + Security
+  withCredentials: true,
 });
 
-export default api;
+// 🔐 Attach JWT automatically
+apiClient.interceptors.request.use((config) => {
+  if (typeof window !== "undefined") {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+  }
+  return config;
+});
 
-// className helper (cn)
-export function cn(...classes: (string | undefined | boolean)[]) {
-  return classes.filter(Boolean).join(" ");
-}
+export default apiClient;

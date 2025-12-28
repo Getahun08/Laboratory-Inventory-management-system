@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import axios from "axios";
 import { useRouter } from "next/navigation";
+import apiClient from "@/lib/apiClient";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -14,20 +14,27 @@ export default function LoginPage() {
     setError("");
 
     try {
-      // Call backend login API
-      const response = await axios.post("https://localhost:8081/auth/login", {
-        username: username, // backend may use 'username' field
-        password: password,
+      // ✅ Call backend login API via apiClient
+      const response = await apiClient.post("/auth/login", {
+        username,
+        password,
       });
 
-      // Save token if backend returns JWT
-      localStorage.setItem("token", response.data.token);
+      // ✅ Save token from backend response
+      const token = response.data.token; // Adjust if your backend uses accessToken
+      if (!token) throw new Error("Token not found in response");
 
-      // Redirect to dashboard
-      router.push("/dashboard");
+      localStorage.setItem("token", token);
+
+      // ✅ Redirect to dashboard
+      router.replace("/dashboard");
     } catch (err: any) {
       console.error(err);
-      setError(err.response?.data || "Login failed. Check your credentials.");
+      setError(
+        err.response?.data?.message ||
+          err.response?.data ||
+          "Login failed. Check your credentials."
+      );
     }
   };
 

@@ -1,6 +1,5 @@
 package org.wldu.webservices.services.contracts;
 
-import org.wldu.webservices.enities.Chemical;
 import org.wldu.webservices.enities.Supplier;
 
 import java.util.List;
@@ -20,11 +19,9 @@ public interface SupplierService {
 
     List<Supplier> getSuppliersByContactPerson(String contactPerson);
 
-    Chemical updateChemical(Long id, Chemical chemical);
-
     void deleteSupplier(Long id);
 
     Supplier update(Long id, Supplier supplier);
 
-    Object countActiveSuppliers();
+    long countActiveSuppliers();
 }

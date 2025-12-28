@@ -16,7 +16,7 @@ public interface EquipmentService {
 
     Equipment getEquipmentByName(String name);
 
-    List<Equipment>getEquipmentByStatus(EquipmentStatus status);
+    List<Equipment> getEquipmentByStatus(EquipmentStatus status);
 
 //    List<Equipment> getEquipmentBySupplier(Long supplierId);
 
@@ -24,5 +24,5 @@ public interface EquipmentService {
 
     void deleteEquipment(Long id);
 
-    Object countAll();
+    long countAll();
 }

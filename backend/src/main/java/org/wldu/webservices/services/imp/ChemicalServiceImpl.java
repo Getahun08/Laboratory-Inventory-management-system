@@ -56,7 +56,6 @@ public class ChemicalServiceImpl implements ChemicalService {
         Chemical existing = chemicalRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Chemical not found"));
 
-        // Update fields
         existing.setName(chemical.getName());
         existing.setChemicalFormula(chemical.getChemicalFormula());
         existing.setQuantity(chemical.getQuantity());
@@ -68,17 +67,17 @@ public class ChemicalServiceImpl implements ChemicalService {
     }
 
     @Override
-    public Object countAll() {
-        return null;
+    public long countAll() {
+        return chemicalRepository.count();
     }
 
     @Override
-    public Object countLowStock() {
-        return null;
+    public long countLowStock(int threshold) {
+        return chemicalRepository.findByQuantityLessThan(threshold).size();
     }
 
     @Override
-    public List<Chemical> findLowStock() {
-        return null;
+    public List<Chemical> findLowStock(int threshold) {
+        return chemicalRepository.findByQuantityLessThan(threshold);
     }
 }
