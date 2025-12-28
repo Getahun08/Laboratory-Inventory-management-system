@@ -18,11 +18,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-// interface Supplier {
-//   id: number;
-//   name: string;
-// }
-
 interface Equipment {
   id: number;
   name: string;
@@ -31,7 +26,6 @@ interface Equipment {
   status: "ACTIVE" | "UNDER_MAINTENANCE" | "DAMAGED" | "RETIRED";
   purchaseDate?: string;
   quantity: number;
-//   supplier?: Supplier;
 }
 
 const fetchEquipment = async (): Promise<Equipment[]> => {
@@ -74,15 +68,12 @@ export default function EquipmentPage() {
             Manage laboratory equipment inventory.
           </p>
         </div>
-        <div className="flex gap-2">
-          <Button asChild>
-            <Link href="/equipment/new">
-              <Plus className="h-4 w-4 mr-2" /> Add Equipment
-            </Link>
-          </Button>
-        </div>
+        <Button asChild>
+          <Link href="/equipment/new">
+            <Plus className="h-4 w-4 mr-2" /> Add Equipment
+          </Link>
+        </Button>
       </div>
-      
 
       <Card>
         <CardHeader className="pb-3 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
@@ -108,7 +99,6 @@ export default function EquipmentPage() {
                 <TableHead>Serial No.</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Quantity</TableHead>
-                {/* <TableHead>Supplier</TableHead> */}
                 <TableHead className="text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
@@ -121,7 +111,6 @@ export default function EquipmentPage() {
                   <TableCell>{item.serialNumber || "-"}</TableCell>
                   <TableCell>{item.status}</TableCell>
                   <TableCell>{item.quantity}</TableCell>
-                  {/* <TableCell>{item.supplier?.name || "-"}</TableCell> */}
 
                   <TableCell className="text-right flex justify-end gap-2">
                     <Button
@@ -129,17 +118,13 @@ export default function EquipmentPage() {
                       size="icon"
                       onClick={() =>
                         router.push(
-                          `/equipment/new?id=${
-                            item.id
-                          }&name=${encodeURIComponent(
+                          `/equipment/new?id=${item.id}&name=${encodeURIComponent(
                             item.name
                           )}&category=${encodeURIComponent(
                             item.category || ""
                           )}&serialNumber=${encodeURIComponent(
                             item.serialNumber || ""
-                          )}&status=${item.status}&quantity=${
-                            item.quantity
-                          }`
+                          )}&status=${item.status}&quantity=${item.quantity}`
                         )
                       }
                     >
@@ -150,8 +135,9 @@ export default function EquipmentPage() {
                       variant="ghost"
                       size="icon"
                       onClick={() => {
-                        if (confirm(`Delete "${item.name}"?`))
+                        if (confirm(`Delete "${item.name}"?`)) {
                           deleteMutation.mutate(item.id);
+                        }
                       }}
                     >
                       <Trash className="h-4 w-4 text-red-600" />
