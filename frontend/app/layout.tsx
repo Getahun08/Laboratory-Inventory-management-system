@@ -12,10 +12,6 @@ import { usePathname } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
-// export const metadata: Metadata = {
-//   title: "Lab Inventory Management",
-//   description: "Laboratory Inventory Management System Admin Dashboard",
-// };
 
 export default function RootLayout({
   children,

@@ -33,7 +33,6 @@ export default function NewTransactionPage() {
   const [transactionDate, setTransactionDate] = useState("");
   const [notes, setNotes] = useState("");
 
-  // 🔹 Fetch transaction when editing
   useEffect(() => {
     if (!id) return;
 
