@@ -3,7 +3,7 @@ import axios from "axios";
 
 // ✅ MUST match Spring Boot HTTPS
 const baseURL =
-  process.env.NEXT_PUBLIC_API_BASE_URL || "https://localhost:8081";
+  process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8081";
 
 export const api = axios.create({
   baseURL,

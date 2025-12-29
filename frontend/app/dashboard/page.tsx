@@ -51,7 +51,7 @@ export default function Dashboard() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [lowStock, setLowStock] = useState<LowStockItem[]>([]);
 
-  const API_BASE = process.env.NEXT_PUBLIC_API_URL || "https://localhost:8081";
+  const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8081";
 
   useEffect(() => {
     const token = localStorage.getItem("token");

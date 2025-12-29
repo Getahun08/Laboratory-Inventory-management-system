@@ -15,7 +15,7 @@ export default function LoginPage() {
 
     try {
       // Call backend login API
-      const response = await axios.post("https://localhost:8081/auth/login", {
+      const response = await axios.post("http://localhost:8081/auth/login", {
         username: username, // backend may use 'username' field
         password: password,
       });
