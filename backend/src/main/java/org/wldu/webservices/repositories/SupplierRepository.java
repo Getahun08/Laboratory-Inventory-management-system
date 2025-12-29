@@ -9,12 +9,9 @@ import java.util.List;
 @Repository
 public interface SupplierRepository extends JpaRepository<Supplier, Long> {
 
-
     Supplier findByName(String name);
 
-
     List<Supplier> findByContactPerson(String contactPerson);
-
 
     Supplier findByEmail(String email);
 }

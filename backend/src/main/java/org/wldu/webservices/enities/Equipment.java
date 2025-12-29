@@ -122,5 +122,8 @@ import org.wldu.webservices.enities.Supplier;
         public void setDescription(String description) {
             this.description = description;
         }
+
+        public void setId(Long id) {
+        }
     }
 

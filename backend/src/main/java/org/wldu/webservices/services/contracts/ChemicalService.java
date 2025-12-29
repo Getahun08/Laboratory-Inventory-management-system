@@ -24,9 +24,9 @@ public interface ChemicalService {
 
     Chemical updateChemical(Long id, Chemical chemical);
 
-    Object countAll();
+    long countAll();
 
-    Object countLowStock();
+    long countLowStock(int threshold);
 
-    List<Chemical> findLowStock();
+    List<Chemical> findLowStock(int threshold);
 }

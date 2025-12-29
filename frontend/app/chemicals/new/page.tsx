@@ -88,19 +88,26 @@ export default function NewChemicalPage() {
   };
 
   return (
+  <div className="min-h-screen bg-slate-50 py-8 px-4">
     <div className="max-w-2xl mx-auto space-y-6">
+      {/* Header */}
       <div className="flex items-center gap-4">
-        <Button variant="ghost" size="icon" asChild>
+        <Button
+          variant="ghost"
+          size="icon"
+          asChild
+          className="hover:bg-blue-50"
+        >
           <Link href="/chemicals">
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft className="h-4 w-4 text-blue-600" />
           </Link>
         </Button>
 
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">
+          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
             {id ? "Edit Chemical" : "Add Chemical"}
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-slate-500">
             {id
               ? "Update chemical information"
               : "Register a new chemical in the inventory"}
@@ -108,38 +115,52 @@ export default function NewChemicalPage() {
         </div>
       </div>
 
+      {/* Form */}
       <form onSubmit={handleSubmit} noValidate>
-        <Card>
+        <Card className="border-blue-100 shadow-sm">
           <CardHeader>
-            <CardTitle>Chemical Details</CardTitle>
+            <CardTitle className="text-blue-800">
+              Chemical Details
+            </CardTitle>
             <CardDescription>
               Enter the specifications of the chemical.
             </CardDescription>
           </CardHeader>
 
-          <CardContent className="space-y-4 grid grid-cols-2 gap-4">
+          <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Name */}
             <div className="space-y-2">
-              <Label htmlFor="name">Chemical Name</Label>
+              <Label htmlFor="name" className="text-slate-700">
+                Chemical Name
+              </Label>
               <Input
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="e.g. Sulfuric Acid"
+                className="border-blue-200 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
 
+            {/* Formula */}
             <div className="space-y-2">
-              <Label htmlFor="chemicalFormula">Chemical Formula</Label>
+              <Label htmlFor="chemicalFormula" className="text-slate-700">
+                Chemical Formula
+              </Label>
               <Input
                 id="chemicalFormula"
                 value={chemicalFormula}
                 onChange={(e) => setChemicalFormula(e.target.value)}
-                placeholder="e.g. H2SO4"
+                placeholder="e.g. H₂SO₄"
+                className="border-blue-200 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
 
+            {/* Quantity */}
             <div className="space-y-2">
-              <Label htmlFor="quantity">Quantity</Label>
+              <Label htmlFor="quantity" className="text-slate-700">
+                Quantity
+              </Label>
               <Input
                 id="quantity"
                 type="number"
@@ -149,52 +170,76 @@ export default function NewChemicalPage() {
                     e.target.value === "" ? "" : Number(e.target.value)
                   )
                 }
-                placeholder="e.g. 25.5"
+                placeholder="e.g. 25"
+                className="border-blue-200 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
 
+            {/* Unit */}
             <div className="space-y-2">
-              <Label htmlFor="unit">Unit</Label>
+              <Label htmlFor="unit" className="text-slate-700">
+                Unit
+              </Label>
               <Input
                 id="unit"
                 value={unit}
                 onChange={(e) => setUnit(e.target.value)}
-                placeholder="e.g. L"
+                placeholder="e.g. L, mL"
+                className="border-blue-200 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
 
+            {/* Expiry */}
             <div className="space-y-2">
-              <Label htmlFor="expiryDate">Expiry Date</Label>
+              <Label htmlFor="expiryDate" className="text-slate-700">
+                Expiry Date
+              </Label>
               <Input
                 id="expiryDate"
                 type="date"
                 value={expiryDate}
                 onChange={(e) => setExpiryDate(e.target.value)}
+                className="border-blue-200 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
 
+            {/* Storage */}
             <div className="space-y-2">
-              <Label htmlFor="storageLocation">Storage Location</Label>
+              <Label
+                htmlFor="storageLocation"
+                className="text-slate-700"
+              >
+                Storage Location
+              </Label>
               <Input
                 id="storageLocation"
                 value={storageLocation}
                 onChange={(e) => setStorageLocation(e.target.value)}
-                placeholder="e.g. Chemical Storage Room A"
+                placeholder="e.g. Storage Room A"
+                className="border-blue-200 focus:border-blue-500 focus:ring-blue-500"
               />
             </div>
           </CardContent>
 
-          <CardFooter className="flex justify-end gap-2">
-            <Button variant="outline" asChild>
+          <CardFooter className="flex justify-end gap-3 border-t border-blue-100">
+            <Button
+              variant="outline"
+              asChild
+              className="border-blue-200 text-blue-700 hover:bg-blue-50"
+            >
               <Link href="/chemicals">Cancel</Link>
             </Button>
 
-            <Button className="text-orange-700" type="submit">
+            <Button
+              type="submit"
+              className="bg-blue-600 hover:bg-blue-700 text-white shadow"
+            >
               {id ? "Update Chemical" : "Save Chemical"}
             </Button>
           </CardFooter>
         </Card>
       </form>
     </div>
-  );
+  </div>
+);
 }

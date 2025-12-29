@@ -8,11 +8,11 @@ import org.wldu.webservices.enities.EquipmentStatus;
 import java.util.List;
 
 @Repository
-public interface EquipmentRepository extends JpaRepository<Equipment,Long> {
+public interface EquipmentRepository extends JpaRepository<Equipment, Long> {
 
     Equipment findByName(String name);
 
     List<Equipment> findByStatus(EquipmentStatus status);
 
-//    List<Equipment>findBySupplierId(Long supplierId);
+//    List<Equipment> findBySupplierId(Long supplierId);
 }

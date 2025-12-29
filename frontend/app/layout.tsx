@@ -1,11 +1,12 @@
 // app/layout.tsx
 "use client";
+import { cn } from "@/lib/utils";
 
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Sidebar } from "@/components/layout/Sidebar";
 import Providers from "@/components/Providers";
-import { cn } from "@/lib/apiClient";
+
 import "./styles/globals.css";
 import { usePathname } from "next/navigation";
 

@@ -90,93 +90,114 @@ export default function SupplierFormPage({
   if (loading) return <p>Loading supplier data...</p>;
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
-      {/* Header */}
-      <div className="flex items-center gap-4">
-        <Button variant="ghost" size="icon" asChild>
-          <Link href="/suppliers">
-            <ArrowLeft className="h-4 w-4" />
-          </Link>
-        </Button>
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">
-            {id ? "Edit Supplier" : "Add Supplier"}
-          </h1>
-          <p className="text-muted-foreground">
-            {id ? "Update supplier information." : "Register a new supplier."}
-          </p>
-        </div>
+   <div className="min-h-screen bg-slate-50 py-8 px-4">
+  <div className="max-w-2xl mx-auto space-y-6">
+    {/* Header */}
+    <div className="flex items-center gap-4">
+      <Button variant="ghost" size="icon" asChild>
+        <Link href="/suppliers">
+          <ArrowLeft className="h-5 w-5 text-slate-700" />
+        </Link>
+      </Button>
+      <div>
+        <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
+          {id ? "Edit Supplier" : "Add Supplier"}
+        </h1>
+        <p className="text-slate-500">
+          {id
+            ? "Update supplier information."
+            : "Register a new supplier."}
+        </p>
       </div>
-
-      {/* Form */}
-      <form onSubmit={handleSubmit}>
-        <Card>
-          <CardHeader>
-            <CardTitle>Supplier Details</CardTitle>
-            <CardDescription>
-              Enter the supplier contact information.
-            </CardDescription>
-          </CardHeader>
-
-          <CardContent className="space-y-4 grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label>Company Name</Label>
-              <Input
-                name="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label>Contact Person</Label>
-              <Input
-                name="contactPerson"
-                value={contactPerson}
-                onChange={(e) => setContactPerson(e.target.value)}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label>Email</Label>
-              <Input
-                name="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label>Phone</Label>
-              <Input
-                name="phoneNumber"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-              />
-            </div>
-
-            <div className="space-y-2 col-span-2">
-              <Label>Address</Label>
-              <Input
-                name="address"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
-              />
-            </div>
-          </CardContent>
-
-          <CardFooter className="flex justify-end gap-2">
-            <Button variant="outline" asChild>
-              <Link href="/suppliers">Cancel</Link>
-            </Button>
-            <Button type="submit">
-              {id ? "Update Supplier" : "Save Supplier"}
-            </Button>
-          </CardFooter>
-        </Card>
-      </form>
     </div>
-  );
+
+    {/* Form */}
+    <form onSubmit={handleSubmit} noValidate>
+      <Card className="border-blue-100 shadow-md">
+        <CardHeader>
+          <CardTitle className="text-blue-800 text-lg font-semibold">
+            Supplier Details
+          </CardTitle>
+          <CardDescription className="text-slate-500">
+            Enter the supplier contact information.
+          </CardDescription>
+        </CardHeader>
+
+        <CardContent className="space-y-4 grid grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label className="text-slate-700 font-medium">Company Name</Label>
+            <Input
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              placeholder="e.g. Lab Supplies Co."
+              className="border-blue-200 focus:border-blue-500 focus:ring-blue-500"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label className="text-slate-700 font-medium">Contact Person</Label>
+            <Input
+              name="contactPerson"
+              value={contactPerson}
+              onChange={(e) => setContactPerson(e.target.value)}
+              placeholder="e.g. John Doe"
+              className="border-blue-200 focus:border-blue-500 focus:ring-blue-500"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label className="text-slate-700 font-medium">Email</Label>
+            <Input
+              name="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="example@email.com"
+              className="border-blue-200 focus:border-blue-500 focus:ring-blue-500"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label className="text-slate-700 font-medium">Phone</Label>
+            <Input
+              name="phoneNumber"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              placeholder="+251 912345678"
+              className="border-blue-200 focus:border-blue-500 focus:ring-blue-500"
+            />
+          </div>
+
+          <div className="space-y-2 col-span-2">
+            <Label className="text-slate-700 font-medium">Address</Label>
+            <Input
+              name="address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+              placeholder="Street, City, Country"
+              className="border-blue-200 focus:border-blue-500 focus:ring-blue-500"
+            />
+          </div>
+        </CardContent>
+
+        <CardFooter className="flex justify-end gap-2">
+          <Button
+            variant="outline"
+            asChild
+            className="border-slate-300 text-slate-700 hover:bg-slate-100"
+          >
+            <Link href="/suppliers">Cancel</Link>
+          </Button>
+
+          <Button className="bg-blue-600 hover:bg-blue-700 text-white shadow-md">
+            {id ? "Update Supplier" : "Save Supplier"}
+          </Button>
+        </CardFooter>
+      </Card>
+    </form>
+  </div>
+</div>
+  )
 }
