@@ -26,7 +26,6 @@ interface Supplier {
   phoneNumber: string;
 }
 
-// Fetch suppliers
 const fetchSuppliers = async (): Promise<Supplier[]> => {
   try {
     const res = await apiClient.get("/api/suppliers");
