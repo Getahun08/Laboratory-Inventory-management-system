@@ -1,47 +1,71 @@
 package org.wldu.webservices.enities;
 
 import jakarta.persistence.*;
-import org.springframework.format.annotation.DurationFormat;
 import java.time.LocalDate;
 
-
-
+/**
+ * Entity representing a chemical stored in the laboratory inventory.
+ * This class maps to the "chemicals" table in the database.
+ */
 @Entity
-@Table(name ="chemicals")
+@Table(name = "chemicals")
 public class Chemical {
+
+    /**
+     * Primary key identifier for the chemical.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Common name of the chemical.
+     */
     @Column(nullable = false)
     private String name;
 
+    /**
+     * Chemical formula (e.g., H2O, NaCl).
+     */
     @Column(nullable = false)
-    private  String chemicalFormula;
+    private String chemicalFormula;
 
+    /**
+     * Quantity of the chemical.
+     */
     @Column(nullable = false)
     private double quantity;
 
+    /**
+     * Unit of measurement (ML, L, etc.).
+     */
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Unit unit;
 
+    /**
+     * Expiry date of the chemical.
+     */
     @Column(nullable = false)
     private LocalDate expiryDate;
 
+    /**
+     * Storage location within the laboratory.
+     */
     @Column(nullable = false)
     private String storageLocation;
 
+    // Default constructor required by JPA
+    public Chemical() {}
 
-
-
-
-
-    public Chemical(){}
-
-    public Chemical(String name, String chemicalFormula, double quantity,
-                    Unit unit, LocalDate expiryDate, String storageLocation) {
-
+    public Chemical(
+            String name,
+            String chemicalFormula,
+            double quantity,
+            Unit unit,
+            LocalDate expiryDate,
+            String storageLocation
+    ) {
         this.name = name;
         this.chemicalFormula = chemicalFormula;
         this.quantity = quantity;
@@ -49,7 +73,6 @@ public class Chemical {
         this.expiryDate = expiryDate;
         this.storageLocation = storageLocation;
     }
-
 
     public long getId() {
         return id;
@@ -107,5 +130,20 @@ public class Chemical {
         this.storageLocation = storageLocation;
     }
 
-
+    /**
+     * Useful for logging and debugging.
+     * Does NOT affect persistence or functionality.
+     */
+    @Override
+    public String toString() {
+        return "Chemical{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", chemicalFormula='" + chemicalFormula + '\'' +
+                ", quantity=" + quantity +
+                ", unit=" + unit +
+                ", expiryDate=" + expiryDate +
+                ", storageLocation='" + storageLocation + '\'' +
+                '}';
+    }
 }
