@@ -9,15 +9,15 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@RestController //here we mark a class as a RestFul  web controller
 @RequestMapping("/api/chemicals")
 public class ChemicalController {
 
-    @Autowired
+    @Autowired //we enable dependency injection here
     private ChemicalService chemicalService;
 
 
-    @PostMapping
+    @PostMapping //we use this here to handle http post request
     public Chemical addChemical(@RequestBody Chemical chemical) {
         return chemicalService.saveChemical(chemical);
     }
