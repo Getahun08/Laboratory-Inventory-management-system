@@ -25,7 +25,7 @@ public class Supplier {
     private String address;
 //
 //    @Column(nullable = false)
-//    private String catagory;
+
 
 
 
