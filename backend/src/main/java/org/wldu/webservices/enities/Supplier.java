@@ -27,7 +27,7 @@ public class Supplier {
 //    @Column(nullable = false)
 
 
-
+//This is Supplier part
 
     public Supplier() {}
 
