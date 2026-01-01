@@ -18,7 +18,7 @@ import { User, Bell, Shield, LogOut } from "lucide-react";
 export default function SettingsPage() {
   const router = useRouter();
 
-  // 🔐 Protect page
+ 
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -26,7 +26,7 @@ export default function SettingsPage() {
     }
   }, [router]);
 
-  // 🚪 Logout handler
+  
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user"); 
@@ -79,7 +79,7 @@ export default function SettingsPage() {
           </CardFooter>
         </Card>
 
-        {/* ================= Notifications ================= */}
+        
         <Card className="shadow-lg border border-gray-200">
           <CardHeader>
             <div className="flex items-center gap-2">
@@ -118,7 +118,7 @@ export default function SettingsPage() {
           </CardContent>
         </Card>
 
-        {/* ================= Security ================= */}
+        
         <Card className="shadow-lg border border-gray-200">
           <CardHeader>
             <div className="flex items-center gap-2">
