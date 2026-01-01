@@ -5,7 +5,7 @@ import org.wldu.webservices.enities.Chemical;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-
+// here we define a contract for chemical related business logic
 public interface ChemicalService {
 
     Chemical saveChemical(Chemical chemical);
