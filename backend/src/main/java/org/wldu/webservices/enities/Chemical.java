@@ -5,12 +5,12 @@ import org.springframework.format.annotation.DurationFormat;
 import java.time.LocalDate;
 
 
-
+//this part explains the table formation for chemicals.
 @Entity
 @Table(name ="chemicals")
 public class Chemical {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //we choose the stratagy for generating PK here
     private Long id;
 
     @Column(nullable = false)
