@@ -28,7 +28,7 @@ interface Chemical {
   expiryDate?: string;
 }
 
-// Fetch chemicals
+// used to Fetch chemicals
 const fetchChemicals = async (): Promise<Chemical[]> => {
   try {
     const res = await apiClient.get("/api/chemicals");
