@@ -88,11 +88,7 @@ public class Supplier {
 
 //    public String getCatagory() {
 //        return catagory;
-//    }
-//
-//    public void setCatagory(String catagory) {
-//        this.catagory = catagory;
-//    }
+
 
     public void setContactPerson(String contactPerson) {
         this.contactPerson = contactPerson;
